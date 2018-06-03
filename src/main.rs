@@ -196,6 +196,16 @@ fn ghp_upload(branch: &str, origin: &str, args: &Args) -> Result<()> {
             require_success(Command::new("git").arg("init").arg(ghp_dir).status()?)?;
             require_success(Command::new("git")
                 .current_dir(ghp_dir)
+                .arg("config")
+                .args(&["user.name", "CrLF0710"])
+                .status()?)?;
+            require_success(Command::new("git")
+                .current_dir(ghp_dir)
+                .arg("config")
+                .args(&["user.email", "crlf0710@gmail.com"])
+                .status()?)?;
+            require_success(Command::new("git")
+                .current_dir(ghp_dir)
                 .arg("checkout")
                 .args(&["-b", &args.deploy_branch])
                 .status()?)?;
